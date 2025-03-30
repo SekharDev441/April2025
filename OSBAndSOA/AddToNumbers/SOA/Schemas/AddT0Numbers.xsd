@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.example.org"
+            targetNamespace="http://www.example.org" elementFormDefault="qualified">
+    <!-- Request element: AddRequest -->
+	  <xsd:element name="AddRequestReq" type="tAddRequestReq"/>
+	    <xsd:element name="AddRequestRes" type="tAddRequestRes"/>
+  <xsd:element name="tAddRequestReq">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="num1" type="xsd:int"/>
+        <xsd:element name="num2" type="xsd:int"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <!-- Response element: AddResponse -->
+  <xsd:element name="tAddRequestRes">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="result" type="xsd:int"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
