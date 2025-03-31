@@ -95,11 +95,11 @@
     <assign name="Assign_ReqDetails">
       <copy>
         <from>$inputVariable.payload/client:ccNumber</from>
-        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$inputVariable.payload/client:ccNumber</to>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:ccNumber</to>
       </copy>
       <copy>
         <from>$inputVariable.payload/client:ccVendor</from>
-        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$inputVariable.payload/client:ccVendor</to>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:ccVendor</to>
       </copy>
     </assign>
     <!-- Generate reply to synchronous request -->
