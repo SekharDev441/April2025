@@ -57,6 +57,7 @@
 
     <!-- Reference to the message that will be returned to the requester-->
     <variable name="outputVariable" messageType="client:CVSBPELProcessResponseMessage"/>
+    <variable name="BusinessFaultMessage" messageType="client:BusinessFaultMessage"/>
   </variables>
 
   <!-- 
@@ -70,40 +71,84 @@
 
     <!-- Receive input from requestor. (Note: This maps to operation defined in CVSBPELProcess.wsdl) -->
     <receive name="receiveInput" partnerLink="cvsbpelprocess_client" portType="client:CVSBPELProcess" operation="process" variable="inputVariable" createInstance="yes"/>
-    <if name="If1">
-      <documentation>
-        <![CDATA[CC Greater then 5K]]>
-      </documentation>
-      <condition>$inputVariable.payload/client:ccNumber &gt;= 5000</condition>
-      <assign name="Assign_ValidCC">
-        <copy>
-          <from>"VALID"</from>
-          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:ccStatus</to>
-        </copy>
-      </assign>
-      <else>
-        <documentation>
-          <![CDATA[CC Less then 5K]]>
-        </documentation>
-        <assign name="Assign_InValidCC">
+    <scope name="Scope1">
+      <faultHandlers>
+        <catch faultName="client:InvalidCCVendor" faultVariable="InvalidCCVendor"
+               faultMessageType="client:BusinessFaultMessage">
+          <sequence name="Sequence3">
+            <assign name="Assign1">
+              <copy>
+                <from>$BusinessFaultMessage.payload/client:FaultName</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:ccStatus</to>
+              </copy>
+            </assign>
+            <reply name="Reply_client" faultName="client:InvalidCCVendor" partnerLink="cvsbpelprocess_client"
+                   variable="outputVariable" portType="client:CVSBPELProcess" operation="process"/>
+          </sequence>
+        </catch>
+      </faultHandlers>
+      <sequence name="Sequence1">
+        <assign name="Assign_ReqDetails">
           <copy>
-            <from>"INVALID"</from>
-            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:ccStatus</to>
+            <from>$inputVariable.payload/client:ccNumber</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:ccNumber</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:ccVendor</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:ccVendor</to>
           </copy>
         </assign>
-      </else>
-    </if>
-    <assign name="Assign_ReqDetails">
-      <copy>
-        <from>$inputVariable.payload/client:ccNumber</from>
-        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:ccNumber</to>
-      </copy>
-      <copy>
-        <from>$inputVariable.payload/client:ccVendor</from>
-        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:ccVendor</to>
-      </copy>
-    </assign>
+        <if name="If2">
+          <condition>$inputVariable.payload/client:ccVendor= "VESA"</condition>
+          <sequence>
+            <if name="If1">
+              <documentation>
+                <![CDATA[CC Greater then 5K]]>
+              </documentation>
+              <condition>$inputVariable.payload/client:ccNumber &gt;= 5000</condition>
+              <assign name="Assign_ValidCC">
+                <copy>
+                  <from>"VALID"</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:ccStatus</to>
+                </copy>
+              </assign>
+              <else>
+                <documentation>
+                  <![CDATA[CC Less then 5K]]>
+                </documentation>
+                <assign name="Assign_InValidCC">
+                  <copy>
+                    <from>"INVALID"</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:ccStatus</to>
+                  </copy>
+                </assign>
+              </else>
+            </if>
+            <reply name="replyOutput" partnerLink="cvsbpelprocess_client" portType="client:CVSBPELProcess"
+                   operation="process" variable="outputVariable"/>
+          </sequence>
+          <else>
+            <sequence name="Sequence2">
+              <assign name="Assign_NotValidVendor">
+                <copy>
+                  <from>102</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$BusinessFaultMessage.payload/client:Code</to>
+                </copy>
+                <copy>
+                  <from>"InvalidCCVendor"</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$BusinessFaultMessage.payload/client:FaultName</to>
+                </copy>
+                <copy>
+                  <from>"Error"</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$BusinessFaultMessage.payload/client:FaultMessage</to>
+                </copy>
+              </assign>
+              <throw name="Throw" faultName="client:InvalidCCVendor" faultVariable="BusinessFaultMessage"/>
+            </sequence>
+          </else>
+        </if>
+      </sequence>
+    </scope>
     <!-- Generate reply to synchronous request -->
-    <reply name="replyOutput" partnerLink="cvsbpelprocess_client" portType="client:CVSBPELProcess" operation="process" variable="outputVariable"/>
   </sequence>
 </process>

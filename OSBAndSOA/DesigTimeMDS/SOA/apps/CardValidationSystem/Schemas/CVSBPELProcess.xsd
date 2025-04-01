@@ -19,4 +19,14 @@
       </sequence>
     </complexType>
   </element>
+  <!--Fault message-->
+  <element name="FaultSchema">
+    <complexType>
+      <sequence>
+        <element name="Code" type="integer"/>
+        <element name="FaultName" type="string"/>
+        <element name="FaultMessage" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
 </schema>

@@ -147,6 +147,10 @@
                      <hash n="filters">
                         <list n="rules">
                            <hash>
+                              <value n="pattern" v="Billngsys/"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
                               <value n="pattern" v="**"/>
                               <value n="type" v="0"/>
                            </hash>
@@ -171,10 +175,6 @@
                      <list n="contributors">
                         <hash>
                            <url n="location" path="SOA/"/>
-                           <value n="type" v="1"/>
-                        </hash>
-                        <hash>
-                           <url n="location" path="../src/"/>
                            <value n="type" v="1"/>
                         </hash>
                      </list>
@@ -249,13 +249,14 @@
                </list>
             </hash>
             <url n="jarURL" path="deploy/sca_DesigTimeMDS.jar"/>
+            <value n="patching_profile" v="false"/>
             <value n="profileClass" v="oracle.tip.tools.ide.fabric.deploy.sar.SarProfile"/>
             <value n="profileName" v="DesigTimeMDS"/>
          </hash>
       </hash>
       <list n="profileList">
-         <string v="DesigTimeMDS"/>
          <string v="DesignTimeProjectLeavelDeployment"/>
+         <string v="DesigTimeMDS"/>
       </list>
    </hash>
    <hash n="oracle.jdeveloper.model.J2eeSettings">
