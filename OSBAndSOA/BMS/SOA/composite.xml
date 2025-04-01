@@ -11,9 +11,10 @@
            xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy"
            xmlns:ui="http://xmlns.oracle.com/soa/designer/"
            xmlns:sca-ext="http://xmlns.oracle.com/sca/1.0-ext">
-  <import namespace="http://xmlns.oracle.com/OSBAndSOA/BMS/BMSBPELProcess" location="WSDLs/BMSBPELProcess.wsdl"
+  <import namespace="http://xmlns.oracle.com/OSBAndSOA/BMS/BMSBPELProcess"
+          location="oramds:/apps/Billngsys/WSDLs/BMSBPELProcess.wsdl"
           importType="wsdl"/>
-  <service name="bmsbpelprocess_client_ep" ui:wsdlLocation="WSDLs/BMSBPELProcess.wsdl">
+  <service name="bmsbpelprocess_client_ep" ui:wsdlLocation="oramds:/apps/Billngsys/WSDLs/BMSBPELProcess.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/OSBAndSOA/BMS/BMSBPELProcess#wsdl.interface(BMSBPELProcess)"
                     callbackInterface="http://xmlns.oracle.com/OSBAndSOA/BMS/BMSBPELProcess#wsdl.interface(BMSBPELProcessCallback)"/>
     <binding.ws port="http://xmlns.oracle.com/OSBAndSOA/BMS/BMSBPELProcess#wsdl.endpoint(bmsbpelprocess_client_ep/BMSBPELProcess_pt)"/>
@@ -26,7 +27,7 @@
   <component name="BMSBPELProcess" version="2.0">
     <implementation.bpel src="BPEL/BMSBPELProcess.bpel"/>
     <componentType>
-      <service name="bmsbpelprocess_client" ui:wsdlLocation="WSDLs/BMSBPELProcess.wsdl">
+      <service name="bmsbpelprocess_client" ui:wsdlLocation="oramds:/apps/Billngsys/WSDLs/BMSBPELProcess.wsdl">
         <interface.wsdl interface="http://xmlns.oracle.com/OSBAndSOA/BMS/BMSBPELProcess#wsdl.interface(BMSBPELProcess)"
                         callbackInterface="http://xmlns.oracle.com/OSBAndSOA/BMS/BMSBPELProcess#wsdl.interface(BMSBPELProcessCallback)"/>
       </service>

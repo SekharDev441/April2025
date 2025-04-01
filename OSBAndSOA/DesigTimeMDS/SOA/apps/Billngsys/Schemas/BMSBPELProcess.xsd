@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+        targetNamespace="http://xmlns.oracle.com/OSBAndSOA/BMS/BMSBPELProcess" xmlns="http://www.w3.org/2001/XMLSchema">
+  <element name="BSRequest">
+    <complexType>
+      <sequence>
+        <element name="OrderId" type="integer"/>
+        <element name="ItenInfo">
+          <complexType>
+            <sequence>
+              <element name="ItemName" type="string"/>
+              <element name="ItemCost" type="integer"/>
+            </sequence>
+          </complexType>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="BSResponse">
+    <complexType>
+      <sequence>
+        <element name="OrderId" type="string"/>
+        <element name="TotalCost" type="string"/>
+        <element name="ItenInfo">
+          <complexType>
+            <sequence>
+              <element name="ItemName" type="string"/>
+              <element name="ItemCost" type="integer"/>
+            </sequence>
+          </complexType>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+</schema>

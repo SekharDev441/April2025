@@ -28,7 +28,8 @@
          xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
          xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
 
-    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/OSBAndSOA/BMS/BMSBPELProcess" location="../WSDLs/BMSBPELProcess.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/OSBAndSOA/BMS/BMSBPELProcess"
+            location="oramds:/apps/Billngsys/WSDLs/BMSBPELProcess.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <!-- 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         PARTNERLINKS                                                      

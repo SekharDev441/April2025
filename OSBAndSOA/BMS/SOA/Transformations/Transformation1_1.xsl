@@ -6,13 +6,13 @@
       <!--SPECIFICATION OF MAP SOURCES AND TARGETS, DO NOT MODIFY.-->
       <oracle-xsl-mapper:mapSources>
          <oracle-xsl-mapper:source type="WSDL">
-            <oracle-xsl-mapper:schema location="../WSDLs/BMSBPELProcess.wsdl"/>
+            <oracle-xsl-mapper:schema location="oramds:/apps/Billngsys/WSDLs/BMSBPELProcess.wsdl"/>
             <oracle-xsl-mapper:rootElement name="BSRequest" namespace="http://xmlns.oracle.com/OSBAndSOA/BMS/BMSBPELProcess"/>
          </oracle-xsl-mapper:source>
       </oracle-xsl-mapper:mapSources>
       <oracle-xsl-mapper:mapTargets>
          <oracle-xsl-mapper:target type="WSDL">
-            <oracle-xsl-mapper:schema location="../WSDLs/BMSBPELProcess.wsdl"/>
+            <oracle-xsl-mapper:schema location="oramds:/apps/Billngsys/WSDLs/BMSBPELProcess.wsdl"/>
             <oracle-xsl-mapper:rootElement name="BSResponse" namespace="http://xmlns.oracle.com/OSBAndSOA/BMS/BMSBPELProcess"/>
          </oracle-xsl-mapper:target>
       </oracle-xsl-mapper:mapTargets>
