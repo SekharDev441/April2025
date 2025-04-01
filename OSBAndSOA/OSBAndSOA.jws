@@ -29,5 +29,6 @@
       <hash><url n="URL" path="BMS/BMS.jpr"/></hash>
       <hash><url n="URL" path="DesignTimeMDSProject/DesignTimeMDSProject.jpr"/></hash>
       <hash><url n="URL" path="HelloWorld/HelloWorld.jpr"/></hash>
+	  <hash><url n="URL" path="CardValidationSystem/CardValidationSystem.jpr"/></hash>
    </list>
 </jws:workspace>
